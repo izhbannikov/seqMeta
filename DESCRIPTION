@@ -1,4 +1,4 @@
-Package: seqMeta
+Package: seqMetaPlus
 Type: Package
 Title: Meta-Analysis of Region-Based Tests of Rare DNA Variants
 Version: 1.6.0
