@@ -56,9 +56,12 @@ prepCox <- function(Z, formula, SNPInfo=NULL, snpNames = "Name", aggregateBy = "
       assign("pb.i", get("pb.i",env)+1,env)
       if(get("pb.i", env)%%ceiling(nsnps/100) == 0) setTxtProgressBar(get("pb",env),get("pb.i",env))
     }
-    model<- coxlr.fit(cbind(z,X), nullmodel$y, nullmodel$strata, NULL,
+    #model<- coxlr.fit(cbind(z,X), nullmodel$y, nullmodel$strata, NULL,
+    #                  init=c(0,nullcoef),coxph.control(iter.max=100),NULL,"efron",rn)
+    model <- agreg.fit(cbind(z,X), nullmodel$y, nullmodel$strata, NULL,
                       init=c(0,nullcoef),coxph.control(iter.max=100),NULL,"efron",rn)
-    return(sign(coef(model)[1])*sqrt(2*diff(model$loglik)))
+	
+	return(sign(coef(model)[1])*sqrt(2*diff(model$loglik)))
   })[ZtoSI]
   names(zlrt) <- SNPInfo[,snpNames]
   zlrt[is.na(zlrt)] <- 0
